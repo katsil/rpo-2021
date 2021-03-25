@@ -18,9 +18,20 @@ target_include_directories(
         native-lib PUBLIC  /Users/il.lebedev/AndroidStudioProjects/libs/spdlog/include
 )
 
+add_library(mbedcrypto SHARED IMPORTED)
+set_target_properties(mbedcrypto PROPERTIES IMPORTED_LOCATION /Users/il.lebedev/AndroidStudioProjects/libs/mbedtls/build/${ANDROID_ABI}/library/libmbedcrypto.so
+)
+
+target_include_directories(
+        native-lib PUBLIC
+        /Users/il.lebedev/AndroidStudioProjects/libs/mbedtls/mbedtls/include
+        /Users/il.lebedev/AndroidStudioProjects/libs/spdlog/include
+)
+
 target_link_libraries(
         native-lib
         spdlog
+        mbedcrypto
         ${log-lib}
 )
 # Creates and names a library, sets it as either STATIC
