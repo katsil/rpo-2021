@@ -9,6 +9,20 @@ cmake_minimum_required(VERSION 3.10.2)
 
 project("lr1_lebedev")
 
+add_library(spdlog STATIC IMPORTED)
+set_target_properties(
+        spdlog PROPERTIES IMPORTED_LOCATION  /Users/il.lebedev/AndroidStudioProjects/libs/build/${ANDROID_ABI}/libspdlog.a
+)
+
+target_include_directories(
+        native-lib PUBLIC  /Users/il.lebedev/AndroidStudioProjects/libs/spdlog/include
+)
+
+target_link_libraries(
+        native-lib
+        spdlog
+        ${log-lib}
+)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
