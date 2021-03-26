@@ -9,13 +9,28 @@ cmake_minimum_required(VERSION 3.10.2)
 
 project("lr1_lebedev")
 
+# Creates and names a library, sets it as either STATIC
+# or SHARED, and provides the relative paths to its source code.
+# You can define multiple libraries, and CMake builds them for you.
+# Gradle automatically packages shared libraries with your APK.
+
+add_library( # Sets the name of the library.
+        native-lib
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
+        native-lib.cpp )
+
 add_library(spdlog STATIC IMPORTED)
 set_target_properties(
         spdlog PROPERTIES IMPORTED_LOCATION  /Users/il.lebedev/AndroidStudioProjects/libs/build/${ANDROID_ABI}/libspdlog.a
 )
 
 target_include_directories(
-        native-lib PUBLIC  /Users/il.lebedev/AndroidStudioProjects/libs/spdlog/include
+        native-lib PUBLIC
+        /Users/il.lebedev/AndroidStudioProjects/libs/spdlog/include
 )
 
 add_library(mbedcrypto SHARED IMPORTED)
@@ -28,25 +43,8 @@ target_include_directories(
         /Users/il.lebedev/AndroidStudioProjects/libs/spdlog/include
 )
 
-target_link_libraries(
-        native-lib
-        spdlog
-        mbedcrypto
-        ${log-lib}
-)
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
 
-add_library( # Sets the name of the library.
-             native-lib
 
-             # Sets the library as a shared library.
-             SHARED
-
-             # Provides a relative path to your source file(s).
-             native-lib.cpp )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -67,7 +65,8 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
-
+        spdlog
+        mbedcrypto
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )

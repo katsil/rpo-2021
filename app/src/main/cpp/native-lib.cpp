@@ -7,7 +7,7 @@
 #include <spdlog/spdlog.h>
 #include "spdlog/sinks/android_sink.h"
 
-#include "/Users/il.lebedev/AndroidStudioProjects/libs/mbedtls/mbedtls/include/mbedtlsentropy.h"
+#include "/Users/il.lebedev/AndroidStudioProjects/libs/mbedtls/mbedtls/include/entropy.h"
 #include "/Users/il.lebedev/AndroidStudioProjects/libs/mbedtls/mbedtls/include/mbedtlsctr_drbg.h"
 #include "/Users/il.lebedev/AndroidStudioProjects/libs/mbedtls/mbedtls/include/mbedtlsdes.h"
 
